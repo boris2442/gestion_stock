@@ -10,7 +10,7 @@ if (isset($_GET['id_client'])) {
 <?php require "header.php"; ?>
 
 
-<main class="flex-1 p-6 bg-gray-100 min-h-screen">
+<!-- <main class="flex-1 p-6 bg-gray-100 min-h-screen"> -->
     <h1 class="text-3xl font-semibold text-blue-900 mb-6">Liste des Clients</h1>
 
     <div class="overflow-x-auto bg-white rounded shadow">
@@ -53,6 +53,6 @@ if (isset($_GET['id_client'])) {
             </tbody>
         </table>
     </div>
-</main>
+<!-- </main> -->
 
 <?php require "../includes/footer.php"; ?>

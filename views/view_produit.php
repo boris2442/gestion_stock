@@ -1,65 +1,60 @@
 <?php
-require "../functions/function.php";
+require_once "../functions/function.php";
+require_once "../includes/header.php"; // contient le <head>, la sidebar et l'ouverture du <body>
+
+
 if (isset($_GET['id_produit'])) {
     $id = $_GET['id_produit'];
     deleteEntity("produits", $id, "id_produit");
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<div class="ml-[-256px] p-4">
+<section class="p-4 w-full transition-all duration-300">
+<h2 class="text-3xl font-semibold text-blue-900 mb-6">Liste des produits</h2>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-
-<title>Document</title>
-</head>
-
-<body>
-    <h2>Listes des produits</h2>
-    <table>
-        <thead>
+<div class="overflow-x-auto bg-white rounded shadow">
+    <table class="min-w-full bg-white rounded shadow-md">
+        <thead class="bg-blue-800 text-white">
             <tr>
-                <td>Id</td>
-                <td>categorie</td>
-                <td>Nom</td>
-                <td>description</td>
-                <td>image</td>
-                <td>prix</td>
-                <td>quantite</td>
-                <td>date_fabrication</td>
-                <td>date_expiration</td>
-                <td>Supprimer</td>
-                <td>Modifier</td>
-                <td>Detail</td>
+                <th class="py-2 px-4 text-left">ID</th>
+                <th class="py-2 px-4 text-left">Catégorie</th>
+                <th class="py-2 px-4 text-left">Nom</th>
+                <th class="py-2 px-4 text-left">Description</th>
+                <th class="py-2 px-4 text-left">Image</th>
+                <th class="py-2 px-4 text-left">Prix</th>
+                <th class="py-2 px-4 text-left">Quantité</th>
+                <th class="py-2 px-4 text-left">Date fabrication</th>
+                <th class="py-2 px-4 text-left">Date expiration</th>
+                <th class="py-2 px-4 text-left">Supprimer</th>
+                <th class="py-2 px-4 text-left">Modifier</th>
             </tr>
         </thead>
-        <tbody>
-            <?php
-            foreach (get("produits") as $produit): ?>
-                <tr>
-                    <td><?= $produit['id_produit'] ?></td>
-                    <td><?= $produit['categorie'] ?></td>
-                    <td><?= $produit['nom_produit'] ?></td>
-                    <td><?= $produit['description'] ?></td>
-                    <td>  <img src="../images/<?= $produit['image'] ?>" alt="image" style="width: 20px; height: 20px; object-fit:cover"> </td>
-                    <td><?= $produit['prix'] ?></td>
-                    <td><?= $produit['quantite'] ?></td>
-                    <td><?= $produit['date_fabrication'] ?></td>
-                    <td><?= $produit['date_expiration'] ?></td>
-                    <td><a href="view_produit.php?id_produit=<?= $produit['id_produit'] ?>">supprimer</a></td>
-                    <td><a href="update_produit.php?id_produit=<?= $produit['id_produit'] ?>">editer</a></td>
-                   
-
+        <tbody class="text-gray-700">
+            <?php foreach (get("produits") as $produit): ?>
+                <tr class="border-b hover:bg-gray-100">
+                    <td class="py-2 px-4"><?= $produit['id_produit'] ?></td>
+                    <td class="py-2 px-4"><?= $produit['categorie'] ?></td>
+                    <td class="py-2 px-4"><?= $produit['nom_produit'] ?></td>
+                    <td class="py-2 px-4"><?= $produit['description'] ?></td>
+                    <td class="py-2 px-4">
+                        <img src="../images/<?= $produit['image'] ?>" alt="image" class="w-10 h-10 object-cover rounded">
+                    </td>
+                    <td class="py-2 px-4"><?= $produit['prix'] ?></td>
+                    <td class="py-2 px-4"><?= $produit['quantite'] ?></td>
+                    <td class="py-2 px-4"><?= $produit['date_fabrication'] ?></td>
+                    <td class="py-2 px-4"><?= $produit['date_expiration'] ?></td>
+                    <td class="py-2 px-4">
+                        <a href="view_produit.php?id_produit=<?= $produit['id_produit'] ?>" class="text-red-600 hover:underline">Supprimer</a>
+                    </td>
+                    <td class="py-2 px-4">
+                        <a href="update_produit.php?id_produit=<?= $produit['id_produit'] ?>" class="text-blue-600 hover:underline">Éditer</a>
+                    </td>
                 </tr>
             <?php endforeach ?>
-
-
         </tbody>
     </table>
-
-</body>
-
-</html>
+</div>
+</section>
+<!-- </main> -->
+ </div>
+<?php require_once "../includes/footer.php"; ?>

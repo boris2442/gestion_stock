@@ -1,4 +1,3 @@
-<!-- includes/header.php -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,5 +18,7 @@
 </head>
 <body class="flex">
     <button id="burger" class="md:hidden p-2 fixed z-50 bg-blue-700 text-white top-4 left-4 rounded">☰</button>
-    <?php include 'includes/sidebar.php'; ?>
-    <main class="ml-64 p-4 w-full">
+
+    <?php include __DIR__ . '/sidebar.php'; ?>
+
+    <main class="ml-64 p-4 w-full transition-all duration-300">
