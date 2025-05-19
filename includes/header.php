@@ -21,4 +21,4 @@
 
     <?php include __DIR__ . '/sidebar.php'; ?>
 
-    <main class="ml-64 p-4 w-full transition-all duration-300">
+    <!-- <main class="ml-64 p-4 w-full transition-all duration-300"> -->

@@ -8,7 +8,7 @@ if (isset($_GET['id_produit'])) {
     deleteEntity("produits", $id, "id_produit");
 }
 ?>
-<div class="ml-[-256px] p-4">
+<div class="ml-64 p-4">
 <section class="p-4 w-full transition-all duration-300">
 <h2 class="text-3xl font-semibold text-blue-900 mb-6">Liste des produits</h2>
 

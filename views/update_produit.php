@@ -1,13 +1,16 @@
 <?php
-require '../includes/database.php'; // Adapte le chemin si besoin
+require '../includes/database.php';
 
+$page_title = "Modifier un produit";
+require '../includes/header.php';
+
+$current = basename($_SERVER['PHP_SELF']);
 $produit = null;
 
-// Vérifier que l'ID du produit est bien envoyé et est un chiffre
+// Vérifie l'ID
 if (isset($_GET['id_produit']) && ctype_digit($_GET['id_produit'])) {
     $id_produit = (int) $_GET['id_produit'];
 
-    // Récupérer les infos du produit
     $sql = "SELECT * FROM produits WHERE id_produit = :id_produit";
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':id_produit', $id_produit, PDO::PARAM_INT);
@@ -15,15 +18,17 @@ if (isset($_GET['id_produit']) && ctype_digit($_GET['id_produit'])) {
     $produit = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$produit) {
-        echo "Produit introuvable.";
+        echo "<p class='text-red-600'>Produit introuvable.</p>";
+        require '../includes/footer.php';
         exit;
     }
 } else {
-    echo "ID invalide.";
+    echo "<p class='text-red-600'>ID invalide.</p>";
+    require '../includes/footer.php';
     exit;
 }
 
-// Traitement du formulaire
+// Traitement de la mise à jour
 if (!empty($_POST['modifier'])) {
     $sql = "UPDATE produits SET 
                 categorie = :categorie,
@@ -46,60 +51,51 @@ if (!empty($_POST['modifier'])) {
     $stmt->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
     $stmt->execute();
 
-    echo "<p>Produit mis à jour avec succès.</p>";
+    echo "<p class='text-green-600 font-bold'>Produit mis à jour avec succès.</p>";
 }
 ?>
+<div class="ml-[-256px]">
+<h2 class="text-xl font-bold mb-4">Modifier le produit</h2>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Modifier un produit</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-<body class="p-6 bg-gray-100 text-black">
-    <h2 class="text-xl font-bold mb-4">Modifier le produit</h2>
+<form method="post" class="space-y-4">
+    <div>
+        <label>Catégorie</label>
+        <input type="text" name="categorie" value="<?= htmlspecialchars($produit['categorie']) ?>"  class="border px-2 py-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    </div>
 
-    <form method="post" class="space-y-4">
-        <div>
-            <label>Catégorie</label>
-            <input type="text" name="categorie" value="<?= htmlspecialchars($produit['categorie']) ?>" class="border px-2 py-1 w-full">
-        </div>
+    <div>
+        <label>Nom</label>
+        <input type="text" name="nom_produit" value="<?= htmlspecialchars($produit['nom_produit']) ?>"  class="border px-2 py-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    </div>
 
-        <div>
-            <label>Nom</label>
-            <input type="text" name="nom_produit" value="<?= htmlspecialchars($produit['nom_produit']) ?>" class="border px-2 py-1 w-full">
-        </div>
+    <div>
+        <label>Description</label>
+        <textarea name="description"  class="border px-2 py-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"><?= htmlspecialchars($produit['description']) ?></textarea>
+    </div>
 
-        <div>
-            <label>Description</label>
-            <textarea name="description" class="border px-2 py-1 w-full"><?= htmlspecialchars($produit['description']) ?></textarea>
-        </div>
+    <div>
+        <label>Prix</label>
+        <input type="number" name="prix" step="0.01" value="<?= htmlspecialchars($produit['prix']) ?>"  class="border px-2 py-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    </div>
 
-        <div>
-            <label>Prix</label>
-            <input type="number" name="prix" step="0.01" value="<?= htmlspecialchars($produit['prix']) ?>" class="border px-2 py-1 w-full">
-        </div>
+    <div>
+        <label>Quantité</label>
+        <input type="number" name="quantite" value="<?= htmlspecialchars($produit['quantite']) ?>"  class="border px-2 py-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    </div>
 
-        <div>
-            <label>Quantité</label>
-            <input type="number" name="quantite" value="<?= htmlspecialchars($produit['quantite']) ?>" class="border px-2 py-1 w-full">
-        </div>
+    <div>
+        <label>Date de fabrication</label>
+        <input type="date" name="date_fabrication" value="<?= htmlspecialchars($produit['date_fabrication']) ?>"  class="border px-2 py-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    </div>
 
-        <div>
-            <label>Date de fabrication</label>
-            <input type="date" name="date_fabrication" value="<?= htmlspecialchars($produit['date_fabrication']) ?>" class="border px-2 py-1 w-full">
-        </div>
+    <div>
+        <label>Date d'expiration</label>
+        <input type="date" name="date_expiration" value="<?= htmlspecialchars($produit['date_expiration']) ?>"  class="border px-2 py-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    </div>
 
-        <div>
-            <label>Date d'expiration</label>
-            <input type="date" name="date_expiration" value="<?= htmlspecialchars($produit['date_expiration']) ?>" class="border px-2 py-1 w-full">
-        </div>
-
-        <div>
-            <input type="submit" name="modifier" value="Modifier le produit" class="bg-blue-500 text-white px-4 py-2 rounded">
-        </div>
-    </form>
-</body>
-</html>
+    <div>
+        <input type="submit" name="modifier" value="Modifier le produit" class="bg-blue-500 text-white px-4 py-2 rounded">
+    </div>
+</form>
+</div>
+<?php require '../includes/footer.php'; ?>

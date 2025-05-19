@@ -2,49 +2,47 @@
 require_once '../includes/database.php';
 require "../functions/function.php";
 require_once "../configuration/config_client.php";
+require_once '../includes/header.php'; // Header déjà complet (HTML, HEAD, BODY)
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
+<section class="min-h-screen flex items-center justify-center bg-blue-200 p-4 w-full">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-2xl ml-64">
+        <h2 class="text-2xl font-bold text-blue-800 mb-6 text-center">Ajouter un client</h2>
+        <form action="" method="post" class="space-y-4">
+            <div>
+                <label for="Nom" class="block text-blue-900 font-semibold">Nom</label>
+                <input type="text" name="nom" id="Nom" class="w-full p-2 border border-blue-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-700">
+            </div>
+            <div>
+                <label for="prenom" class="block text-blue-900 font-semibold">Prénom</label>
+                <input type="text" name="prenom" id="prenom" class="w-full p-2 border border-blue-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-700">
+            </div>
+            <div>
+                <label for="adresse" class="block text-blue-900 font-semibold">Adresse</label>
+                <input type="text" name="adresse" id="adresse" class="w-full p-2 border border-blue-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-700">
+            </div>
+            <div>
+                <label for="email" class="block text-blue-900 font-semibold">Email</label>
+                <input type="email" name="email" id="email" class="w-full p-2 border border-blue-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-700">
+            </div>
+            <div>
+                <label for="telephone" class="block text-blue-900 font-semibold">Téléphone</label>
+                <input type="text" name="telephone" id="telephone" class="w-full p-2 border border-blue-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-700">
+            </div>
+            <div>
+                <span class="block text-blue-900 font-semibold mb-1">Sexe</span>
+                <label class="mr-4">
+                    <input type="radio" name="sexe" value="Masculin" class="mr-1"> Masculin
+                </label>
+                <label>
+                    <input type="radio" name="sexe" value="Feminin" class="mr-1"> Féminin
+                </label>
+            </div>
+            <div class="text-center">
+                <input type="submit" value="Ajouter" name="okay" class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            </div>
+        </form>
+    </div>
+</section>
 
-    <title>Document</title>
-</head>
-
-<body>
-    <form action="" method="post">
-        <div class="">
-            <label for="Nom">Nom</label>
-            <input type="text" name="nom" id="Nom">
-        </div>
-        <div class="">
-            <label for="Nom">Prenom</label>
-            <input type="text" name="prenom" id="prenom">
-        </div>
-        <div class="">
-            <label for="adresse">adresse</label>
-            <input type="text" name="adresse" id="adresse">
-        </div>
-        <div class="">
-            <label for="email">email</label>
-            <input type="email" name="email" id="email">
-        </div>
-        <div class="">
-            <label for="telephone">telephone</label>
-            <input type="text" name="telephone" id="telephone">
-        </div>
-        <div class="">
-            <input type="radio" name="sexe" id="" value="Maxculin">
-            <input type="radio" name="sexe" id="" value="Feminin">
-        </div>
-        <div class="">
-            <input type="submit" value="Ajouter" name="okay">
-        </div>
-    </form>
-</body>
-
-</html>
+<?php require_once '../includes/footer.php'; ?>

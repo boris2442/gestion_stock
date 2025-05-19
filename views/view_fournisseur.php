@@ -7,7 +7,7 @@ if (isset($_GET['id_fournisseur'])) {
     deleteEntity("fournisseurs", $id, "id_fournisseur");
 }
 ?>
-<div class="ml-[-256px] p-4">
+<div class="ml-[256px] p-4">
 <!-- ✅ Ajout d'un conteneur cohérent comme dans view_client -->
 <main class="p-6  min-h-screen">
     <h2 class="text-2xl font-bold mb-6 text-blue-900">Liste des fournisseurs</h2>
